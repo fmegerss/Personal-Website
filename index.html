@@ -486,13 +486,16 @@
 
         /* Actual photograph container */
         .avatar-image-container {
-            width: 80%;
-            height: 80%;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             overflow: hidden;
             border: 2px solid var(--accent-cyan);
             box-shadow: var(--glow-cyan);
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 5;
         }
 
@@ -503,6 +506,7 @@
             object-position: center top;
             filter: grayscale(15%) contrast(105%);
             transition: var(--transition-smooth);
+            display: block;
         }
 
         .hud-avatar-frame:hover img {
