@@ -12,262 +12,391 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-       <style>
-    /* -------------------------------------------------------------
-       1. GLOBAL STYLES & DESIGN SYSTEM
-       ------------------------------------------------------------- */
-    :root {
-        /* Palette representing deep space / laboratory dashboard */
-        --bg-canvas: #0a0d14; 
-        
-        /* Updated Glass System: Increased visibility & brightness */
-        --bg-glass-heavy: rgba(15, 23, 38, 0.92);
-        --bg-glass-medium: rgba(22, 30, 46, 0.78);
-        --bg-glass-light: rgba(255, 255, 255, 0.08);
-        
-        --border-heavy: rgba(30, 41, 59, 0.9);
-        --border-medium: rgba(0, 242, 254, 0.35);
-        --border-light: rgba(255, 255, 255, 0.18);
+<style>
 
-        /* Neon Bioluminescent Accents */
-        --accent-cyan: #00f2fe;
-        --accent-orange: #ff8c00;
-        --accent-blue: #00a8ff;
-        --accent-violet: #8b5cf6;
-        
-        /* Text Colors */
-        --text-primary: #ffffff;
-        --text-secondary: #cbd5e1;
-        --text-muted: #8493a8;
-        
-        /* Glow Systems */
-        --glow-cyan: 0 0 15px rgba(0, 242, 254, 0.55), 0 0 30px rgba(0, 242, 254, 0.25);
-        --glow-orange: 0 0 15px rgba(255, 140, 0, 0.55), 0 0 30px rgba(255, 140, 0, 0.25);
-        --glow-blue: 0 0 15px rgba(0, 168, 255, 0.55);
-        --glow-violet: 0 0 15px rgba(139, 92, 246, 0.5);
-        --glow-frame: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 242, 254, 0.12);
-        
-        /* Typography */
-        --font-sans: 'Inter', sans-serif;
-        --font-mono: 'Fira Code', monospace;
-        
-        --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        --transition-tactile: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
+        /* -------------------------------------------------------------
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+           1. GLOBAL STYLES & DESIGN SYSTEM
 
-    html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 80px;
-    }
+           ------------------------------------------------------------- */
 
-    body {
-        background-color: var(--bg-canvas);
-        color: var(--text-secondary);
-        font-family: var(--font-sans);
-        line-height: 1.6;
-        overflow-x: hidden;
-        padding: 0;
-    }
+        :root {
 
-    /* Standard Accessible Focus States */
-    a:focus-visible, button:focus-visible {
-        outline: 2px solid var(--accent-cyan);
-        outline-offset: 4px;
-    }
+            /* Palette representing deep space / laboratory dashboard */
 
-    /* Parallax Background Master Layer - Brightened Overlay */
-    .parallax-section {
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        position: relative;
-        padding: 100px 50px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        border-bottom: 1px solid rgba(27, 36, 54, 0.5);
-    }
+            --bg-canvas: #0a0d14; 
 
-    /* Lightened background overlay so images show through clearly */
-    .parallax-section::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, rgba(10, 13, 20, 0.55) 0%, rgba(10, 13, 20, 0.75) 100%);
-        z-index: 1;
-        pointer-events: none;
-    }
+            --bg-glass-heavy: rgba(10, 13, 20, 0.95);
 
-    /* Technical grid overlay */
-    .parallax-section::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: 
-            radial-gradient(rgba(0, 242, 254, 0.05) 1.5px, transparent 1.5px),
-            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-        background-size: 32px 32px, 64px 64px, 64px 64px;
-        pointer-events: none;
-        opacity: 0.85;
-        z-index: 2;
-    }
+            --bg-glass-medium: rgba(18, 24, 36, 0.75);
 
-    /* Inner container formatting */
-    .section-container {
-        position: relative;
-        z-index: 5;
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
+            --bg-glass-light: rgba(255, 255, 255, 0.03);
 
-    /* Section Headings & Glowing Titles */
-    .section-title-wrap {
-        margin-bottom: 50px;
-    }
+            
 
-    .section-eyebrow {
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        color: var(--accent-orange);
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 8px;
-        display: block;
-        text-shadow: var(--glow-orange);
-    }
+            --border-heavy: rgba(27, 36, 54, 0.9);
 
-    .section-headline {
-        font-size: 2.5rem;
-        color: var(--text-primary);
-        font-weight: 800;
-        letter-spacing: -1px;
-        line-height: 1.2;
-        text-shadow: var(--glow-cyan);
-    }
+            --border-medium: rgba(0, 242, 254, 0.2);
 
-    /* Reusable Glass Card Component */
-    .glass-card {
-        background: var(--bg-glass-medium);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid var(--border-light);
-        border-radius: 16px;
-        padding: 2.5rem;
-        margin-bottom: 2.5rem;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-        transition: var(--transition-smooth);
-    }
+            --border-light: rgba(255, 255, 255, 0.08);
 
-    .glass-card:hover {
-        border-color: var(--border-medium);
-        box-shadow: 0 12px 40px 0 rgba(0, 242, 254, 0.15);
-    }
 
-    /* Side-by-Side Flex Grid Layout */
-    .flex-grid {
-        display: flex;
-        gap: 2.5rem;
-        flex-wrap: wrap;
-        align-items: center;
-    }
 
-    .flex-text {
-        flex: 1.2;
-        min-width: 300px;
-    }
+            /* Neon Bioluminescent Accents */
 
-    .flex-media {
-        flex: 1;
-        min-width: 300px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+            --accent-cyan: #00f2fe;
 
-    /* Video Player Container (Aspect ratio preserved, non-stretching) */
-    .video-frame {
-        width: 100%;
-        height: 380px;
-        border-radius: 12px;
-        overflow: hidden;
-        background: #000000;
-        border: 1px solid var(--border-light);
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
-    }
+            --accent-orange: #ff8c00;
 
-    .video-frame video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 12px;
-    }
+            --accent-blue: #00a8ff;
 
-    /* Tactile Interactive Button */
-    .tactile-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        font-family: var(--font-mono);
-        font-size: 0.85rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--text-primary);
-        background: rgba(18, 24, 36, 0.85);
-        border: 1px solid var(--accent-cyan);
-        padding: 12px 24px;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: var(--transition-tactile);
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 242, 254, 0.12);
-    }
+            --accent-violet: #8b5cf6;
 
-    .tactile-btn::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.2), transparent);
-        transform: translateX(-100%);
-        transition: transform 0.5s ease;
-    }
+            
 
-    .tactile-btn:hover {
-        transform: translateY(-3px);
-        border-color: var(--accent-cyan);
-        box-shadow: var(--glow-cyan);
-        background: rgba(0, 242, 254, 0.12);
-    }
+            /* Text Colors */
 
-    .tactile-btn:hover::before {
-        transform: translateX(100%);
-    }
+            --text-primary: #ffffff;
 
-    .tactile-btn:active {
-        transform: translateY(-1px);
-    }
+            --text-secondary: #c5d3e8;
 
-    .btn-arrow {
-        transition: transform 0.3s ease;
-    }
+            --text-muted: #5e7390;
 
-    .tactile-btn:hover .btn-arrow {
-        transform: translateX(4px);
-    }
-</style>
+            
 
+            /* Glow Systems */
+
+            --glow-cyan: 0 0 15px rgba(0, 242, 254, 0.45);
+
+            --glow-orange: 0 0 15px rgba(255, 140, 0, 0.45);
+
+            --glow-blue: 0 0 15px rgba(0, 168, 255, 0.45);
+
+            --glow-violet: 0 0 15px rgba(139, 92, 246, 0.4);
+
+            --glow-frame: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 242, 254, 0.06);
+
+            
+
+            /* Typography */
+
+            --font-sans: 'Inter', sans-serif;
+
+            --font-mono: 'Fira Code', monospace;
+
+            
+
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+            --transition-tactile: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+        }
+
+
+
+        * {
+
+            box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+
+        html {
+
+            scroll-behavior: smooth;
+
+            scroll-padding-top: 80px;
+
+        }
+
+
+
+        body {
+
+            background-color: var(--bg-canvas);
+
+            color: var(--text-secondary);
+
+            font-family: var(--font-sans);
+
+            line-height: 1.6;
+
+            overflow-x: hidden;
+
+            padding: 0;
+
+        }
+
+
+
+        /* Standard Accessible Focus States */
+
+        a:focus-visible, button:focus-visible {
+
+            outline: 2px solid var(--accent-cyan);
+
+            outline-offset: 4px;
+
+        }
+
+
+
+        /* Parallax Background Master Layer */
+
+        .parallax-section {
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-repeat: no-repeat;
+
+            background-attachment: fixed;
+
+            position: relative;
+
+            padding: 100px 50px;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 100vh;
+
+            border-bottom: 1px solid rgba(27, 36, 54, 0.5);
+
+        }
+
+
+
+        /* Dark overlay filter for high content contrast */
+
+        .parallax-section::before {
+
+            content: '';
+
+            position: absolute;
+
+            inset: 0;
+
+            background: linear-gradient(180deg, rgba(12, 15, 23, 0.78) 0%, rgba(12, 15, 23, 0.94) 100%);
+
+            z-index: 1;
+
+            pointer-events: none;
+
+        }
+
+
+
+        /* Subtle technical grids layering */
+
+        .parallax-section::after {
+
+            content: '';
+
+            position: absolute;
+
+            inset: 0;
+
+            background-image: 
+
+                radial-gradient(rgba(0, 242, 254, 0.03) 1.5px, transparent 1.5px),
+
+                linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+
+                linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+
+            background-size: 32px 32px, 64px 64px, 64px 64px;
+
+            pointer-events: none;
+
+            opacity: 0.7;
+
+            z-index: 2;
+
+        }
+
+
+
+        /* Inner container formatting */
+
+        .section-container {
+
+            position: relative;
+
+            z-index: 5;
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+        }
+
+
+
+        /* Section Headings */
+
+        .section-title-wrap {
+
+            margin-bottom: 50px;
+
+        }
+
+
+
+        .section-eyebrow {
+
+            font-family: var(--font-mono);
+
+            font-size: 0.8rem;
+
+            color: var(--accent-orange);
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 8px;
+
+            display: block;
+
+        }
+
+
+
+        .section-headline {
+
+            font-size: 2.5rem;
+
+            color: var(--text-primary);
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+
+            line-height: 1.2;
+
+        }
+
+
+
+        /* Tactile Interactive Button */
+
+        .tactile-btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-family: var(--font-mono);
+
+            font-size: 0.85rem;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            color: var(--text-primary);
+
+            background: rgba(18, 24, 36, 0.8);
+
+            border: 1px solid var(--accent-cyan);
+
+            padding: 12px 24px;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            transition: var(--transition-tactile);
+
+            position: relative;
+
+            overflow: hidden;
+
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.08);
+
+        }
+
+
+
+        .tactile-btn::before {
+
+            content: '';
+
+            position: absolute;
+
+            inset: 0;
+
+            background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.15), transparent);
+
+            transform: translateX(-100%);
+
+            transition: transform 0.5s ease;
+
+        }
+
+
+
+        .tactile-btn:hover {
+
+            transform: translateY(-3px);
+
+            border-color: var(--accent-cyan);
+
+            box-shadow: var(--glow-cyan);
+
+            background: rgba(0, 242, 254, 0.08);
+
+        }
+
+
+
+        .tactile-btn:hover::before {
+
+            transform: translateX(100%);
+
+        }
+
+
+
+        .tactile-btn:active {
+
+            transform: translateY(-1px);
+
+        }
+
+
+
+        .btn-arrow {
+
+            transition: transform 0.3s ease;
+
+        }
+
+
+
+        .tactile-btn:hover .btn-arrow {
+
+            transform: translateX(4px);
+
+        }
         /* -------------------------------------------------------------
            2. NAVIGATION BAR
            ------------------------------------------------------------- */
