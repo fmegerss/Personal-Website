@@ -1495,35 +1495,37 @@
                     </div>
                 </article>
 
-                <!-- PROJECT 02 -->
-                <article class="project-card reveal-element">
-                    <div class="project-card-meta">
-                        <span class="project-index">PROJECT_02</span>
-                        <h3 class="project-title">High-Throughput Genomic Variant Pipeline</h3>
-                        <div class="hero-badge" style="margin-bottom: 15px; background: rgba(255, 140, 0, 0.1); border-color: rgba(255, 140, 0, 0.3); color: var(--accent-orange);">
-                            <span class="status-pulse-dot" style="background-color: var(--accent-orange); box-shadow: var(--glow-orange);"></span>
-                            IN DEVELOPMENT
-                        </div>
-                        <p class="project-summary">
-                            Computational workflow development for reproducible genomic variant analysis, with an emphasis on workflow orchestration, containerized environments, and scalable data processing.
-                        </p>
-                        <div class="project-tags-wrap">
-                            <span class="project-tag-pill">Nextflow</span>
-                            <span class="project-tag-pill">Docker</span>
-                            <span class="project-tag-pill">Bash</span>
-                            <span class="project-tag-pill">Genomics</span>
-                        </div>
-                        <a href="https://github.com/fmegerss/Project2" target="_blank" rel="noopener noreferrer" class="tactile-btn" aria-label="Open Project 2 repository on GitHub">
-                            VIEW PROJECT ↗ <i class="fa-brands fa-github"></i>
-                        </a>
-                    </div>
-
-                    <div class="project-visual-wrapper">
-                        <div class="project-visual-grid"></div>
-                        <canvas class="trajectory-canvas" id="canvas-genomic"></canvas>
-                        <div class="hud-overlay" style="bottom: 10px; right: 10px;"><i class="fa-solid fa-network-wired"></i> workflow_dag</div>
-                    </div>
-                </article>
+                 <!-- Project 2: Heroneck Pipeline -->
+                <div class="project-card" style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: 2rem;">
+                
+                  <!-- Left Side: Video Demo -->
+                  <div class="project-media" style="flex: 1; min-width: 300px;">
+                    <video autoplay loop muted playsinline controls style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
+                      <source src="HeroNeck-Demo.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                    <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem; text-align: center;">
+                      Demonstration of automated keypoint extraction and kinematic tracking.
+                    </p>
+                  </div>
+                
+                  <!-- Right Side: Heroneck Pipeline Description -->
+                  <div class="project-info" style="flex: 1; min-width: 300px;">
+                    <h3 style="margin-top: 0;">Heroneck Pipeline</h3>
+                    <p><strong>Overview:</strong> A semi automated data processing pipeline built to quantify rapid anatomical movements and joint covariance during Great Egret strike behaviors.</p>
+                
+                    <h4>The Problem</h4>
+                    <p>High-speed strike mechanics in wading birds require frame by frame anatomical measurement. Manually tracking neck curvature and segment velocity across video sets is time-consuming, subjective, and difficult to standardize when analyzing statistical covariance across joint dynamics.</p>
+                
+                    <h4>What Was Solved</h4>
+                    <ul>
+                      <li><strong>Automated Feature Tracking:</strong> Streamlined marker and joint tracking across high-speed video frames to eliminate manual annotation bottlenecks.</li>
+                      <li><strong>Covariance Quantification:</strong> Converted spatial positioning over time into statistical covariance metrics, isolating key anatomical dependencies during strikes.</li>
+                      <li><strong>Data Standardization:</strong> Produced reproducible numerical data outputs ready for downstream biomechanical analysis and visualization.</li>
+                    </ul>
+                  </div>
+                
+                </div>
 
                 <!-- PROJECT 03 -->
                 <article class="project-card reveal-element">
