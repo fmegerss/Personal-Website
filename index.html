@@ -3,866 +3,426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fenan Megerssa | Computational Biology & Entrepreneurship | Brown University</title>
-    <link rel="icon" type="image/jpeg" href="./favicon.jpg">
-    <!-- Google Fonts: Inter (Sans-serif) and Fira Code (Monospace) -->
+    <title>Fenan Megerssa | Computational Biology & Entrepreneurship</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-<style>
+    <style>
+        /* -------------------------------------------------------------
+           GLOBAL STYLES & DESIGN SYSTEM
+           ------------------------------------------------------------- */
+        :root {
+            --bg-canvas: #0a0d14; 
+            --bg-glass-heavy: rgba(15, 23, 38, 0.92);
+            --bg-glass-medium: rgba(22, 30, 46, 0.85);
+            
+            --border-heavy: rgba(30, 41, 59, 0.9);
+            --border-medium: rgba(0, 242, 254, 0.35);
+            --border-light: rgba(255, 255, 255, 0.18);
 
-        /* -------------------------------------------------------------
-           1. GLOBAL STYLES & DESIGN SYSTEM
-           ------------------------------------------------------------- */
-        :root {
-            /* Palette representing deep space / laboratory dashboard */
-            --bg-canvas: #0a0d14; 
-            --bg-glass-heavy: rgba(10, 13, 20, 0.95);
-            --bg-glass-medium: rgba(18, 24, 36, 0.75);
-            --bg-glass-light: rgba(255, 255, 255, 0.03);
-            
-            --border-heavy: rgba(27, 36, 54, 0.9);
-            --border-medium: rgba(0, 242, 254, 0.2);
-            --border-light: rgba(255, 255, 255, 0.08);
+            --accent-cyan: #00f2fe;
+            --accent-orange: #ff8c00;
+            --accent-blue: #00a8ff;
+            
+            --text-primary: #ffffff;
+            --text-secondary: #cbd5e1;
+            --text-muted: #8493a8;
+            
+            --glow-cyan: 0 0 15px rgba(0, 242, 254, 0.55), 0 0 30px rgba(0, 242, 254, 0.25);
+            --glow-orange: 0 0 15px rgba(255, 140, 0, 0.55);
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+            
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
 
-            /* Neon Bioluminescent Accents */
-            --accent-cyan: #00f2fe;
-            --accent-orange: #ff8c00;
-            --accent-blue: #00a8ff;
-            --accent-violet: #8b5cf6;
-            
-            /* Text Colors */
-            --text-primary: #ffffff;
-            --text-secondary: #c5d3e8;
-            --text-muted: #5e7390;
-            
-            /* Glow Systems */
-            --glow-cyan: 0 0 15px rgba(0, 242, 254, 0.45);
-            --glow-orange: 0 0 15px rgba(255, 140, 0, 0.45);
-            --glow-blue: 0 0 15px rgba(0, 168, 255, 0.45);
-            --glow-violet: 0 0 15px rgba(139, 92, 246, 0.4);
-            --glow-frame: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 242, 254, 0.06);
-            
-            /* Typography */
-            --font-sans: 'Inter', sans-serif;
-            --font-mono: 'Fira Code', monospace;
-            
-            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --transition-tactile: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
 
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px;
-        }
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-secondary);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-        body {
-            background-color: var(--bg-canvas);
-            color: var(--text-secondary);
-            font-family: var(--font-sans);
-            line-height: 1.6;
-            overflow-x: hidden;
-            padding: 0;
-        }
+        a { text-decoration: none; }
+        img, video { max-width: 100%; height: auto; display: block; }
 
-        /* Standard Accessible Focus States */
-        a:focus-visible, button:focus-visible {
-            outline: 2px solid var(--accent-cyan);
-            outline-offset: 4px;
-        }
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10, 13, 20, 0.85);
+            border-bottom: 1px solid var(--border-light);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
 
-        /* Parallax Background Master Layer */
-        .parallax-section {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            position: relative;
-            padding: 100px 50px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            border-bottom: 1px solid rgba(27, 36, 54, 0.5);
-        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-        /* Dark overlay filter for high content contrast */
-        .parallax-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(12, 15, 23, 0.78) 0%, rgba(12, 15, 23, 0.94) 100%);
-            z-index: 1;
-            pointer-events: none;
-        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-        /* Subtle technical grids layering */
-        .parallax-section::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: 
-                radial-gradient(rgba(0, 242, 254, 0.03) 1.5px, transparent 1.5px),
-                linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
-            background-size: 32px 32px, 64px 64px, 64px 64px;
-            pointer-events: none;
-            opacity: 0.7;
-            z-index: 2;
-        }
+        .logo-box {
+            width: 36px;
+            height: 36px;
+            background-color: var(--text-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-        /* Inner container formatting */
-        .section-container {
-            position: relative;
-            z-index: 5;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .logo-box span {
+            color: var(--bg-canvas);
+            font-weight: 800;
+            font-size: 1.15rem;
+            font-family: var(--font-mono);
+        }
 
-        /* Section Headings */
-        .section-title-wrap {
-            margin-bottom: 50px;
-        }
+        .logo-text {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
 
-        .section-eyebrow {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--accent-orange);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            display: block;
-        }
+        .logo-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: block;
+        }
 
-        .section-headline {
-            font-size: 2.5rem;
-            color: var(--text-primary);
-            font-weight: 800;
-            letter-spacing: -1px;
-            line-height: 1.2;
-        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-        /* Tactile Interactive Button */
-        .tactile-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-primary);
-            background: rgba(18, 24, 36, 0.8);
-            border: 1px solid var(--accent-cyan);
-            padding: 12px 24px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: var(--transition-tactile);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.08);
-        }
+        .nav-link {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: var(--transition-smooth);
+        }
 
-        .tactile-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.15), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
-        }
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+        }
 
-        .tactile-btn:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-cyan);
-            box-shadow: var(--glow-cyan);
-            background: rgba(0, 242, 254, 0.08);
-        }
+        /* Parallax & Containers */
+        .parallax-section {
+            position: relative;
+            padding: 100px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            border-bottom: 1px solid var(--border-heavy);
+        }
 
-        .tactile-btn:hover::before {
-            transform: translateX(100%);
-        }
+        .section-container {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-        .tactile-btn:active {
-            transform: translateY(-1px);
-        }
+        /* Section Headings */
+        .section-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+            text-shadow: var(--glow-orange);
+        }
 
-        .btn-arrow {
-            transition: transform 0.3s ease;
-        }
+        .section-headline {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            text-shadow: var(--glow-cyan);
+            margin-bottom: 30px;
+        }
 
-        .tactile-btn:hover .btn-arrow {
-            transform: translateX(4px);
-        }
+        /* Hero Layout */
+        #hero { padding-top: 140px; }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-name {
+            font-size: 3.8rem;
+            color: var(--text-primary);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        .hero-title {
+            font-size: 1.5rem;
+            font-family: var(--font-mono);
+            color: var(--accent-orange);
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        /* Hero Avatar Frame */
+        .hud-avatar-frame {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            margin: 0 auto;
+            border: 2px solid var(--accent-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .avatar-image-container {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .avatar-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--bg-glass-medium);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            transition: var(--transition-smooth);
+        }
+
+        .glass-card:hover {
+            border-color: var(--border-medium);
+            box-shadow: 0 12px 40px 0 rgba(0, 242, 254, 0.15);
+        }
+
+        /* Project Flex Grid Layout */
+        .flex-grid {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .flex-text {
+            flex: 1.2;
+            min-width: 300px;
+        }
+
+        .flex-media {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .video-frame {
+            width: 100%;
+            height: 380px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000000;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-frame video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Buttons */
+        .tactile-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            background: rgba(18, 24, 36, 0.85);
+            border: 1px solid var(--accent-cyan);
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.12);
+        }
+
+        .tactile-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow-cyan);
+            background: rgba(0, 242, 254, 0.12);
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-name { font-size: 2.8rem; }
+            .flex-grid { flex-direction: column; }
+        }
     </style>
- 
-    <!-- 2. NAVIGATION BAR -->
-    <nav class="navbar" id="navbar" role="navigation" aria-label="Main Navigation">
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
         <div class="nav-container">
-            <a href="#hero" class="nav-logo" aria-label="Fenan Megerssa home page logo">
+            <a href="#hero" class="nav-logo">
                 <div class="logo-box"><span>FM</span></div>
-                <div class="logo-text">
-                    Fenan Megerssa
-                    <span class="logo-sub">Computational Biology & Entrepreneurship</span>
+                <div>
+                    <span class="logo-text">Fenan Megerssa</span>
+                    <span class="logo-sub">Computational Biology</span>
                 </div>
             </a>
-            
-            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle Menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-
-            <div class="nav-links" id="nav-menu">
-                <a href="#hero" class="nav-link active">Home</a>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link">Home</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#research" class="nav-link">Research</a>
-                <a href="#toolkit" class="nav-link">Toolkit</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- 3. HERO SECTION -->
-    <section class="parallax-section" id="hero">
-        <div class="section-container hero-grid">
-            
-            <div class="hero-content reveal-element">
-                <span class="hero-eyebrow">COMPUTATIONAL BIOLOGY & ENTREPRENEURSHIP • BROWN UNIVERSITY</span>
-                <h1 class="hero-name">Fenan Megerssa</h1>
-                <p class="hero-title">Computational Biology & Entrepreneurship | Brown University</p>
-                
-                <p class="hero-desc">
-                    Decoding the beautiful and intricate systems of life through computational thinking, wet-lab research, and quantitative science.
-                </p>
-                <p class="hero-subdesc">
-                    Exploring the intersection of computational biology, biomedical research, AI, and the systems that shape life.
-                </p>
-
-                <div class="hero-ctas">
-                    <a href="#research" class="tactile-btn" aria-label="Explore my research page">
-                        Explore My Research <i class="fa-solid fa-arrow-right btn-arrow"></i>
-                    </a>
-                    <a href="#contact" class="tactile-btn" aria-label="Contact and collaboration methods">
-                        Let's Connect <i class="fa-solid fa-circle-nodes btn-arrow"></i>
-                    </a>
+    <!-- HERO SECTION -->
+    <section id="hero" class="parallax-section">
+        <div class="section-container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <span class="section-eyebrow">COMPUTATIONAL BIOLOGY • BROWN UNIVERSITY</span>
+                    <h1 class="hero-name">Fenan Megerssa</h1>
+                    <h2 class="hero-title">Computational Biology & Entrepreneurship</h2>
+                    <p style="margin-bottom: 25px;">Decoding the intricate systems of life through computational thinking, biological research, and quantitative science.</p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="#research" class="tactile-btn">Explore My Research</a>
+                        <a href="#contact" class="tactile-btn" style="border-color: var(--accent-orange);">Let's Connect</a>
+                    </div>
                 </div>
-            </div>
-
-            <!-- 5. HERO VISUAL (SOPHISTICATED HUD AVATAR FRAME) -->
-            <div class="hero-visual-wrapper reveal-element">
                 <div class="hud-avatar-frame">
-                    <!-- Rotating HUD lines -->
-                    <div class="hud-ring hud-ring-outer"></div>
-                    <div class="hud-ring hud-ring-middle"></div>
-                    <div class="hud-ring hud-ring-inner"></div>
-
-                    <!-- Coordinates labels -->
-                    <div class="hud-coords coords-top">LAT_41.8268_N</div>
-                    <div class="hud-coords coords-bottom">LON_71.4025_W</div>
-                    <div class="hud-coords coords-left">BROWN_U</div>
-                    <div class="hud-coords coords-right">BIO_COMP</div>
-
-                    <!-- Headshot image -->
                     <div class="avatar-image-container">
-                        <img src="profile.JPG" alt="Fenan Megerssa">
-                    </div>
-
-                    <!-- Decorative Floating HUD Labels -->
-                    <div class="hud-floating-tag tag-school">
-                        <span class="hud-tag-dot"></span>
-                        BROWN UNIVERSITY
-                    </div>
-                    <div class="hud-floating-tag tag-sys">
-                        <span class="hud-tag-dot"></span>
-                        BIOLOGICAL SYSTEMS / COMPUTATIONAL ANALYSIS
+                        <img src="avatar.jpg" alt="Fenan Megerssa" onerror="this.src='https://via.placeholder.com/280'">
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- 7. ABOUT SECTION — STORY FIRST -->
-    <section class="parallax-section" id="about">
+    <!-- RESEARCH & PROJECTS SECTION -->
+    <section id="research" class="parallax-section">
         <div class="section-container">
-            
-            <div class="section-title-wrap reveal-element">
-                <span class="section-eyebrow">// NARRATIVE BIOGRAPHY</span>
-                <h2 class="section-headline">From Ethiopia to Computational Biology</h2>
-            </div>
+            <span class="section-eyebrow">RESEARCH & PROJECTS</span>
+            <h2 class="section-headline">Featured Engineering Work</h2>
 
-            <div class="about-grid">
-                
-                <!-- Detailed Personal Bio (Storyteller style) -->
-                <div class="biography-narrative reveal-element">
-                    <p class="about-story-p">
-                        Hi, I'm Fenan.
-                    </p>
-                    <p class="about-story-p">
-                        I'm an aspiring computational scientist, builder, and first-generation college student studying Computational Biology and Entrepreneurship at Brown University. At the heart of what I do is simple: finding connections across disciplines and understanding how complex systems work.
-                    </p>
-                    <p class="about-story-p">
-                        I was born and fed in Ethiopia, where I grew up herding cattle in a small town in western Ethiopia (believed to be the region where coffee originated). Growing up so closely connected to animals and nature, I became fascinated by the way the world around me (and the human body within it) has adapted, persisted, and evolved through the test of time. That early sense of fascination continues to shape the questions I ask today.
-                    </p>
-                    <p class="about-story-p">
-                        Now, as a sophomore in Computational Biology on the Biological Sciences Track, I am drawn to the quantitative side of biology: scientific computing, biomedical research, vaccine development, pharmacology, and the engineering of biological systems. My interest in this work became deeply personal during the COVID-19 pandemic, when I lost a relative to the virus. Experiencing the consequences of an unpredictable pandemic firsthand bolstered my desire to contribute to research that helps us understand disease, anticipate biological threats, and develop better interventions.
-                    </p>
-                    <p class="about-story-p">
-                        I am especially interested in the computational journey from genomic sequence data and biological measurements to models, discoveries, and eventually real-world solutions across any field. More broadly, I want to build the quantitative and interdisciplinary toolkit needed to tackle complex problems wherever biology, computation, engineering, and human health intersect.
-                    </p>
-                    <p class="about-story-p">
-                        My long-term goal is to grow into an interdisciplinary physician-scientist, translating discoveries made through computational and experimental biology into meaningful advances in medicine.
-                    </p>
-                    <p class="about-story-p">
-                        Outside the laboratory, I'm an avid nature lover who enjoys hiking, morning walks, watching science-fiction films, and (perhaps most of all) meeting new people. Some of my favorite ideas have come from conversations with people who think completely differently from me. I thrive in collaborative environments and am always excited to connect with curious minds.
-                    </p>
-                </div>
+            <!-- Project 02: Heroneck Pipeline -->
+            <div class="glass-card">
+                <span class="section-eyebrow">PROJECT 02</span>
+                <h3 class="section-headline" style="font-size: 1.8rem; margin-bottom: 2rem;">Heroneck Pipeline</h3>
 
-                <!-- 8. ABOUT SECTION VISUALIZATION (JOURNEY PATHWAY) -->
-                <div class="journey-pathway reveal-element">
-                    
-                    <div class="journey-node">
-                        <div class="journey-bullet"><div class="journey-bullet-dot"></div></div>
-                        <div class="journey-meta">01 • Roots</div>
-                        <h3 class="journey-title">Ethiopia</h3>
-                        <p class="journey-desc">Developing early curiosity about complex physical systems and ecological interactions.</p>
-                    </div>
-
-                    <div class="journey-node">
-                        <div class="journey-bullet"><div class="journey-bullet-dot"></div></div>
-                        <div class="journey-meta">02 • Foundation</div>
-                        <h3 class="journey-title">Curiosity</h3>
-                        <p class="journey-desc">Fascinated by biochemical mechanisms and natural structural architectures.</p>
-                    </div>
-
-                    <div class="journey-node">
-                        <div class="journey-bullet"><div class="journey-bullet-dot"></div></div>
-                        <div class="journey-meta">03 • Academic Hub</div>
-                        <h3 class="journey-title">Brown University</h3>
-                        <p class="journey-desc">Sophomore on the Biological Sciences Track integrating mathematics, biology, and computer science.</p>
-                    </div>
-
-                    <div class="journey-node">
-                        <div class="journey-bullet"><div class="journey-bullet-dot"></div></div>
-                        <div class="journey-meta">04 • Concentration</div>
-                        <h3 class="journey-title">Computational Biology</h3>
-                        <p class="journey-desc">Constructing algorithms and predictive pipelines to analyze high-throughput biological data.</p>
-                    </div>
-
-                    <div class="journey-node">
-                        <div class="journey-bullet"><div class="journey-bullet-dot"></div></div>
-                        <div class="journey-meta">05 • Clinical Outbreak Mission</div>
-                        <h3 class="journey-title">Biomedical Research</h3>
-                        <p class="journey-desc">Personal dedication to vaccine research, pathogen signaling networks, and pharmacology.</p>
-                    </div>
-
-                    <div class="journey-node">
-                        <div class="journey-bullet"><div class="journey-bullet-dot"></div></div>
-                        <div class="journey-meta">06 • Aspirations</div>
-                        <h3 class="journey-title">Physician-Scientist</h3>
-                        <p class="journey-desc">Bridging clinical medicine with biochemical software modeling to heal lives.</p>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- 10. RESEARCH SECTION -->
-    <section class="parallax-section" id="research">
-        <div class="section-container">
-            
-            <div class="section-title-wrap reveal-element">
-                <span class="section-eyebrow">// PORTFOLIO &amp; WORKS</span>
-                <h2 class="section-headline">Research &amp; Computational Projects</h2>
-                <p class="research-intro">
-                    Building computational approaches to understand biological systems—from animal biomechanics to genomic and molecular data.
-                </p>
-            </div>
-
-            <!-- 3 Glassmorphism Cards -->
-            <div class="projects-grid">
-                
-                                <!-- PROJECT 01 — FEATURED RESEARCH -->
-                                <article class="project-card featured-poster reveal-element">
-                                    <div class="project-card-meta">
-                                        <span class="project-index">PROJECT_01 // FEATURED</span>
-                                        <h3 class="project-title">Investigating Patterns of Covariance in Great Egret Neck Motion towards Bio-Inspired Engineering</h3>
-                                        <div class="hero-badge" style="margin-bottom: 15px; background: rgba(255, 140, 0, 0.1); border-color: rgba(255, 140, 0, 0.3); color: var(--accent-orange);">
-                                            <span class="status-pulse-dot" style="background-color: var(--accent-orange); box-shadow: var(--glow-orange);"></span>
-                                            IN DEVELOPMENT
-                                        </div>
-                                        <p class="project-summary">
-                                            Analyzing multi-joint cervical motion during Great Egret feeding strikes to investigate whether different regions of the neck function as coordinated modules. The project combines high-speed videography, computational kinematics, covariance analysis, and quantitative visualization to study how complex biological motion is organized.
-                                        </p>
-                                        <div class="project-tags-wrap">
-                                            <span class="project-tag-pill">Python</span>
-                                            <span class="project-tag-pill">R</span>
-                                            <span class="project-tag-pill">Data Analysis</span>
-                                            <span class="project-tag-pill">Bioconductor</span>
-                                            <span class="project-tag-pill">Field Biology</span>
-                                        </div>
-                                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                                            <a href="poster.pdf" target="_blank" class="tactile-btn" aria-label="Open my Great Egret neck motion research poster in PDF format">
-                                                View Research Poster PDF <i class="fa-solid fa-file-pdf"></i>
-                                            </a>
-                                            <a href="https://github.com/fmegerss/project1" target="_blank" rel="noopener noreferrer" class="tactile-btn" style="border-color: var(--text-muted); color: var(--text-secondary); box-shadow: none;" aria-label="Open Project 1 repository on GitHub">
-                                                VIEW PROJECT ↗ <i class="fa-brands fa-github"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Decorative scientific visual inside card -->
-                                    <div class="project-visual-wrapper">
-                                        <div class="project-visual-grid"></div>
-                                        <canvas class="trajectory-canvas" id="canvas-egret"></canvas>
-                                        <div class="hud-overlay" style="bottom: 10px; right: 10px;"><i class="fa-solid fa-compass-drafting"></i> strike_trajectory_v1</div>
-                                    </div>
-                                </article>
-                                    
-                       <!-- Project 2: Heroneck Pipeline -->
-<div class="project-card" style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: 2rem;">
-
-  <!-- Left Side: Video Demo -->
-  <div class="project-media" style="flex: 1; min-width: 300px;">
-    <video autoplay loop muted playsinline controls style="width: 100%; border-radius: 8px; border: 1px solid #ddd;">
-      <source src="HeroNeck-Demo.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem; text-align: center;">
-      Demonstration of automated keypoint extraction and kinematic tracking.
-    </p>
-  </div>
-
-  <!-- Right Side: Heroneck Pipeline Description -->
-  <div class="project-info" style="flex: 1; min-width: 300px;">
-    <h3 style="margin-top: 0;">Heroneck Pipeline</h3>
-    <p><strong>Overview:</strong> An automated data processing pipeline built to quantify rapid anatomical movements and joint covariance during Great Egret strike behaviors.</p>
-
-    <h4>The Problem</h4>
-    <p>High-speed strike mechanics in wading birds require frame-by-frame anatomical measurement. Manually tracking neck curvature and segment velocity across video sets is time-consuming, subjective, and difficult to standardize when analyzing statistical covariance across joint dynamics.</p>
-
-    <h4>What Was Solved</h4>
-    <ul>
-      <li><strong>Automated Feature Tracking:</strong> Streamlined marker and joint tracking across high-speed video frames to eliminate manual annotation bottlenecks.</li>
-      <li><strong>Covariance Quantification:</strong> Converted spatial positioning over time into statistical covariance metrics, isolating key anatomical dependencies during strikes.</li>
-      <li><strong>Data Standardization:</strong> Produced reproducible numerical data outputs ready for downstream biomechanical analysis and visualization.</li>
-    </ul>
-  </div>
-
-</div>
-                                    <!-- PROJECT 03 -->
-                <article class="project-card reveal-element">
-                    <div class="project-card-meta">
-                        <span class="project-index">PROJECT_03</span>
-                        <h3 class="project-title">Deep Learning for Structural Biology</h3>
-                        <div class="hero-badge" style="margin-bottom: 15px; background: rgba(255, 140, 0, 0.1); border-color: rgba(255, 140, 0, 0.3); color: var(--accent-orange);">
-                            <span class="status-pulse-dot" style="background-color: var(--accent-orange); box-shadow: var(--glow-orange);"></span>
-                            IN DEVELOPMENT
-                        </div>
-                        <p class="project-summary">
-                            Exploring computational approaches for understanding biological structure through machine learning, numerical analysis, and protein-focused computational workflows.
+                <div class="flex-grid">
+                    <!-- Text Column -->
+                    <div class="flex-text">
+                        <p style="margin-bottom: 1.2rem; font-size: 1.05rem;">
+                            <strong style="color: var(--accent-cyan);">Overview:</strong> An automated data processing pipeline built to quantify rapid anatomical movements and joint covariance during Great Egret strike behaviors.
                         </p>
-                        <div class="project-tags-wrap">
-                            <span class="project-tag-pill">PyTorch</span>
-                            <span class="project-tag-pill">BioPython</span>
-                            <span class="tech-pill project-tag-pill">NumPy</span>
-                            <span class="project-tag-pill">Machine Learning</span>
-                        </div>
-                        <a href="https://github.com/fmegerss/fmegerss" target="_blank" rel="noopener noreferrer" class="tactile-btn" aria-label="Open structural biology deep learning repository on GitHub">
-                            VIEW PROJECT ↗ <i class="fa-brands fa-github"></i>
-                        </a>
-                    </div>
-
-                    <div class="project-visual-wrapper">
-                        <div class="project-visual-grid"></div>
-                        <canvas class="trajectory-canvas" id="canvas-structural"></canvas>
-                        <div class="hud-overlay" style="bottom: 10px; right: 10px;"><i class="fa-solid fa-cube"></i> protein_folding_cnn</div>
-                    </div>
-                </article>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- 15. TECHNICAL TOOLKIT -->
-    <section id="toolkit">
-        <div class="section-container">
-            
-            <div class="section-title-wrap reveal-element">
-                <span class="section-eyebrow">// CORE SKILLS</span>
-                <h2 class="section-headline">Computational Toolkit</h2>
-            </div>
-
-            <div class="toolkit-grid">
-                
-                <!-- Category 1 -->
-                <div class="toolkit-category-card reveal-element">
-                    <h3 class="toolkit-cat-header"><i class="fa-solid fa-code"></i> Computation</h3>
-                    <div class="skills-chips-wrap">
-                        <div class="skill-chip-row"><span class="skill-name">Python</span><span class="skill-node"></span></div>
-                        <div class="skill-chip-row"><span class="skill-name">R</span><span class="skill-node"></span></div>
-                        <div class="skill-chip-row"><span class="skill-name">Bash</span><span class="skill-node"></span></div>
-                        <div class="skill-chip-row"><span class="skill-name">Git</span><span class="skill-node"></span></div>
-                    </div>
-                </div>
-
-                <!-- Category 2 -->
-                <div class="toolkit-category-card reveal-element">
-                    <h3 class="toolkit-cat-header"><i class="fa-solid fa-dna"></i> Bioinformatics</h3>
-                    <div class="skills-chips-wrap">
-                        <div class="skill-chip-row"><span class="skill-name">Genomics</span><span class="skill-node"></span></div>
-                        <div class="skill-chip-row"><span class="skill-name">Variant Analysis</span><span class="skill-node"></span></div>
-                        <div class="skill-chip-row"><span class="skill-name">Biological Data Analysis</span><span class="skill-node"></span></div>
-                        <div class="skill-chip-row"><span class="skill-name">Bioconductor</span><span class="skill-node"></span></div>
-                    </div>
-                </div>
-
-                <!-- Category 3 -->
-                <div class="toolkit-category-card reveal-element">
-                    <h3 class="toolkit-cat-header"><i class="fa-solid fa-brain"></i> Machine Learning</h3>
-                    <div class="skills-chips-wrap">
-                        <div class="skill-chip-row"><span class="skill-name">Machine Learning</span><span class="skill-node"></span></div>
-                        <div class="skill-chip-row"><span class="skill-name">PyTorch</span><span class="skill-node"></span></div>
-                        <div class="skill-chip-row"><span class="skill-name">Numerical Computing</span><span class="skill-node"></span></div>
-                    </div>
-                </div>
-
-                <!-- Category 4 -->
-                <div class="toolkit-category-card reveal-element">
-                    <h3 class="toolkit-cat-header"><i class="fa-solid fa-gears"></i> Workflows</h3>
-                    <div class="skills-chips-wrap">
-                        <div class="skill-chip-row"><span class="skill-name">Nextflow</span><span class="skill-node"></span></div>
-                        <div class="skill-chip-row"><span class="skill-name">Docker</span><span class="skill-node"></span></div>
-                        <div class="skill-chip-row"><span class="skill-name">Reproducible Computing</span><span class="skill-node"></span></div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- 16. CONTACT SECTION -->
-    <section class="parallax-section" id="contact">
-        <div class="section-container">
-            
-            <div class="contact-card reveal-element">
-                <span class="contact-eyebrow">// DIALOGUE AND COLLABORATION</span>
-                <h2 class="contact-headline">Let's Build Something Meaningful.</h2>
-                <p class="contact-desc">
-                    Whether you're working on computational biology, biomedical research, drug discovery, or another problem at the intersection of biology and computation, I'd love to connect.
-                </p>
-
-                <!-- Tactile Contacts buttons -->
-                <div class="contact-actions-row">
-                    
-                    <a href="mailto:fenan_megerssa@brown.edu" class="contact-action-btn email-btn" aria-label="Send email to Fenan Megerssa">
-                        <i class="fa-regular fa-envelope"></i>
-                        <span>LET'S CONNECT →</span>
-                    </a>
-
-                    <a href="https://github.com/fmegerss/fmegerss" target="_blank" class="contact-action-btn github-btn" aria-label="Open Fenan Megerssa GitHub profile">
-                        <i class="fa-brands fa-github"></i>
-                        <span>GitHub</span>
-                    </a>
-
-                    <a href="https://www.linkedin.com/in/fenan-megerssa-34a397235/" target="_blank" class="contact-action-btn linkedin-btn" aria-label="Open Fenan Megerssa LinkedIn profile">
-                        <i class="fa-brands fa-linkedin-in"></i>
-                        <span>LinkedIn</span>
-                    </a>
-
-                </div>
-
-                <!-- Footer elements -->
-                <div class="footer-wrap">
-                    <div>
-                        &copy; 2026 Fenan Megerssa. All research rights reserved.
-                    </div>
-                    <div class="footer-status-tag">
-                        <span class="status-pulse-dot"></span>
-                        <span>BIOPORTAL CORE_SYS v3.0</span>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- -------------------------------------------------------------
-       12. JAVASCRIPT / INTERACTIONS
-       ------------------------------------------------------------- */ -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            // Scroll-triggered Sticky Navigation & Active State Indicators
-            const navbar = document.getElementById('navbar');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section, #toolkit');
-
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-
-                // Smooth Navigation Highlight on Scroll
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (window.scrollY >= (sectionTop - 150)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-            // Mobile Navigation Toggle
-            const navToggle = document.getElementById('nav-toggle');
-            const navMenu = document.getElementById('nav-menu');
-
-            navToggle.addEventListener('click', () => {
-                const expanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
-                navToggle.setAttribute('aria-expanded', !expanded);
-                navMenu.classList.toggle('active');
-            });
-
-            // Close mobile menu on nav link click
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    navToggle.setAttribute('aria-expanded', 'false');
-                });
-            });
-
-            // IntersectionObserver-based reveal animations
-            const reveals = document.querySelectorAll('.reveal-element');
-            
-            const revealOnScroll = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        observer.unobserve(entry.target); // Trigger only once
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -40px 0px'
-            });
-
-            reveals.forEach(el => revealOnScroll.observe(el));
-
-            // Dynamic trajectory visualizations for projects
-            initTrajectoryCanvases();
-
-            function initTrajectoryCanvases() {
-                // Check if user prefers reduced motion
-                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                    return;
-                }
-
-                // 1. Egret Trajectory Canvas (Double joint mechanics mockup)
-                const egretCanvas = document.getElementById('canvas-egret');
-                if (egretCanvas) {
-                    const ctx = egretCanvas.getContext('2d');
-                    let width = egretCanvas.width = egretCanvas.parentElement.clientWidth;
-                    let height = egretCanvas.height = 250;
-                    
-                    window.addEventListener('resize', () => {
-                        width = egretCanvas.width = egretCanvas.parentElement.clientWidth;
-                    });
-
-                    let t = 0;
-                    function drawEgret() {
-                        ctx.clearRect(0, 0, width, height);
-                        t += 0.015;
-
-                        // Background grid elements
-                        ctx.strokeStyle = 'rgba(0, 242, 254, 0.05)';
-                        ctx.lineWidth = 1;
-
-                        // Joint positions modeling Egret neck
-                        let p0 = { x: 50, y: height / 2 };
-                        let p1 = { x: p0.x + 80 + Math.cos(t) * 15, y: height / 2 - 40 + Math.sin(t) * 20 };
-                        let p2 = { x: p1.x + 90 - Math.sin(t) * 10, y: p1.y + 70 + Math.cos(t) * 25 };
-                        let p3 = { x: p2.x + 60 + Math.cos(t * 1.5) * 30, y: p2.y - 10 + Math.sin(t * 1.5) * 10 };
-
-                        // Draw bones
-                        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-                        ctx.lineWidth = 2;
-                        ctx.beginPath();
-                        ctx.moveTo(p0.x, p0.y);
-                        ctx.lineTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.lineTo(p3.x, p3.y);
-                        ctx.stroke();
-
-                        // Draw joints nodes
-                        const joints = [p0, p1, p2, p3];
-                        joints.forEach((joint, idx) => {
-                            ctx.beginPath();
-                            ctx.arc(joint.x, joint.y, idx === 3 ? 6 : 4, 0, Math.PI * 2);
-                            ctx.fillStyle = idx === 3 ? 'var(--accent-orange)' : 'var(--accent-cyan)';
-                            ctx.shadowColor = idx === 3 ? 'var(--accent-orange)' : 'var(--accent-cyan)';
-                            ctx.shadowBlur = 8;
-                            ctx.fill();
-                            ctx.shadowBlur = 0; // reset
-                        });
-
-                        // Draw motion envelope path
-                        ctx.strokeStyle = 'rgba(0, 242, 254, 0.2)';
-                        ctx.lineWidth = 1;
-                        ctx.setLineDash([4, 4]);
-                        ctx.beginPath();
-                        ctx.arc(p2.x, p2.y, 40, 0, Math.PI * 2);
-                        ctx.stroke();
-                        ctx.setLineDash([]);
-
-                        requestAnimationFrame(drawEgret);
-                    }
-                    drawEgret();
-                }
-
-                // 2. Genomic Pipeline Workflow Mockup (BWA-MEM align nodes)
-                const genomicCanvas = document.getElementById('canvas-genomic');
-                if (genomicCanvas) {
-                    const ctx = genomicCanvas.getContext('2d');
-                    let width = genomicCanvas.width = genomicCanvas.parentElement.clientWidth;
-                    let height = genomicCanvas.height = 250;
-
-                    window.addEventListener('resize', () => {
-                        width = genomicCanvas.width = genomicCanvas.parentElement.clientWidth;
-                    });
-
-                    let offset = 0;
-                    function drawGenomic() {
-                        ctx.clearRect(0, 0, width, height);
-                        offset += 0.5;
-
-                        const nodes = [
-                            { x: 40, y: 125, label: 'FASTQ' },
-                            { x: 130, y: 70, label: 'ALIGN' },
-                            { x: 130, y: 180, label: 'FILTER' },
-                            { x: 220, y: 125, label: 'BAM' },
-                            { x: 310, y: 125, label: 'VCF' }
-                        ];
-
-                        // Draw connections
-                        ctx.strokeStyle = 'rgba(0, 168, 255, 0.25)';
-                        ctx.lineWidth = 1.5;
-                        ctx.setLineDash([4, 4]);
-                        ctx.lineDashOffset = -offset;
-
-                        // Align node paths
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[0].x, nodes[0].y);
-                        ctx.lineTo(nodes[1].x, nodes[1].y);
-                        ctx.lineTo(nodes[3].x, nodes[3].y);
                         
-                        ctx.moveTo(nodes[0].x, nodes[0].y);
-                        ctx.lineTo(nodes[2].x, nodes[2].y);
-                        ctx.lineTo(nodes[3].x, nodes[3].y);
+                        <h4 style="color: #fff; margin-top: 1.2rem; margin-bottom: 0.4rem; font-size: 1.15rem;">The Problem</h4>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.2rem;">
+                            High-speed strike mechanics in wading birds require frame-by-frame anatomical measurement. Manually tracking neck curvature and segment velocity across video sets is time-consuming, subjective, and difficult to standardize when analyzing statistical covariance across joint dynamics.
+                        </p>
 
-                        ctx.moveTo(nodes[3].x, nodes[3].y);
-                        ctx.lineTo(nodes[4].x, nodes[4].y);
-                        ctx.stroke();
-                        ctx.setLineDash([]);
+                        <h4 style="color: #fff; margin-top: 1.2rem; margin-bottom: 0.4rem; font-size: 1.15rem;">What Was Solved</h4>
+                        <ul style="padding-left: 1.2rem; color: var(--text-secondary);">
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #fff;">Automated Feature Tracking:</strong> Streamlined marker and joint tracking across high-speed video frames to eliminate manual annotation bottlenecks.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong style="color: #fff;">Covariance Quantification:</strong> Converted spatial positioning over time into statistical covariance metrics, isolating key anatomical dependencies during strikes.</li>
+                            <li><strong style="color: #fff;">Data Standardization:</strong> Produced reproducible numerical data outputs ready for downstream biomechanical analysis and visualization.</li>
+                        </ul>
+                    </div>
 
-                        // Draw workflow boxes
-                        nodes.forEach(node => {
-                            ctx.fillStyle = 'var(--bg-canvas)';
-                            ctx.strokeStyle = 'var(--accent-blue)';
-                            ctx.lineWidth = 1.5;
-                            ctx.beginPath();
-                            ctx.arc(node.x, node.y, 16, 0, Math.PI * 2);
-                            ctx.fill();
-                            ctx.stroke();
+                    <!-- Video Demo Column -->
+                    <div class="flex-media">
+                        <div class="video-frame">
+                            <video autoplay loop muted playsinline controls>
+                                <source src="HeroNeck-Demo.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.6rem; text-align: center;">
+                            Demonstration of automated keypoint extraction and kinematic tracking.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-                            ctx.beginPath();
-                            ctx.arc(node.x, node.y, 4, 0, Math.PI * 2);
-                            ctx.fillStyle = 'var(--accent-orange)';
-                            ctx.shadowBlur = 6;
-                            ctx.shadowColor = 'var(--accent-orange)';
-                            ctx.fill();
-                            ctx.shadowBlur = 0;
+        </div>
+    </section>
 
-                            // Label
-                            ctx.fillStyle = 'var(--text-secondary)';
-                            ctx.font = '9px "Fira Code", monospace';
-                            ctx.textAlign = 'center';
-                            ctx.fillText(node.label, node.x, node.y + 30);
-                        });
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="parallax-section">
+        <div class="section-container" style="text-align: center;">
+            <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+                <span class="section-eyebrow">GET IN TOUCH</span>
+                <h2 class="section-headline" style="font-size: 2.2rem;">Let's Collaborate</h2>
+                <p style="margin-bottom: 30px;">Interested in computational biology, research partnerships, or entrepreneurial ventures?</p>
+                <a href="mailto:fenan_megerssa@brown.edu" class="tactile-btn">Send Email</a>
+            </div>
+        </div>
+    </section>
 
-                        requestAnimationFrame(drawGenomic);
-                    }
-                    drawGenomic();
-                }
-
-                // 3. Protein Folding Neural Network representation
-                const structuralCanvas = document.getElementById('canvas-structural');
-                if (structuralCanvas) {
-                    const ctx = structuralCanvas.getContext('2d');
-                    let width = structuralCanvas.width = structuralCanvas.parentElement.clientWidth;
-                    let height = structuralCanvas.height = 250;
-
-                    window.addEventListener('resize', () => {
-                        width = structuralCanvas.width = structuralCanvas.parentElement.clientWidth;
-                    });
-
-                    let step = 0;
-                    function drawStructural() {
-                        ctx.clearRect(0, 0, width, height);
-                        step += 0.02;
-
-                        // Draw structural bio folding protein helix line
-                        ctx.strokeStyle = 'rgba(139, 92, 246, 0.4)';
-                        ctx.lineWidth = 2;
-                        ctx.beginPath();
-                        for (let x = 30; x < width - 30; x += 5) {
-                            let y = 125 + Math.sin(x * 0.03 + step) * 35 + Math.cos(x * 0.01 + step * 0.5) * 15;
-                            if (x === 30) ctx.moveTo(x, y);
-                            else ctx.lineTo(x, y);
-
-                            // Small interactive data point markers
-                            if (Math.round(x) % 40 === 0) {
-                                ctx.fillStyle = 'var(--accent-cyan)';
-                                ctx.beginPath();
-                                ctx.arc(x, y, 3, 0, Math.PI * 2);
-                                ctx.fill();
-                            }
-                        }
-                        ctx.stroke();
-
-                        requestAnimationFrame(drawStructural);
-                    }
-                    drawStructural();
-                }
-            }
-
-        });
-    </script>
 </body>
 </html>
